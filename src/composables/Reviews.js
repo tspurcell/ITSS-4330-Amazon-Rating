@@ -44,7 +44,7 @@ const reviews = ref([
         book_length: 'Epic Novel (long)',
         comfort_level: 3,
         books_per_month: '0-2'
-    },
+    }
 ]);
 
 export default ()=> {
