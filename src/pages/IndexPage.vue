@@ -7,8 +7,6 @@
     </div>
   </div>
   <q-page class="flex flex-center q-pa-lg">
-    <div class="row">
-    </div>
     <q-card flat>
       <q-card-section class="q-gutter-md">
         <div class="text-bold text-h5">Create Review</div>
@@ -83,7 +81,7 @@
 
       <q-card-actions>
         <q-space></q-space>
-        <q-btn color="secondary" text-color="black" no-caps label="Submit"></q-btn>
+        <q-btn @click="submit" color="secondary" text-color="black" no-caps label="Submit"></q-btn>
       </q-card-actions>
     </q-card>
   </q-page>
@@ -91,51 +89,47 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import ReviewCriteria from "src/composables/ReviewCriteria";
+import Reviews from "src/composables/Reviews";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: 'IndexPage',
   setup() {
 
+    const {
+      age_range_options,
+      gender_options,
+      book_length_options,
+      comfort_levels,
+      books_per_month_options
+    } = ReviewCriteria();
+
     const age_range = ref(null);
-    const age_range_options = ref([
-      { label: 'Under 20', value: 'Under 20' },
-      { label: '20-35', value: '20-35' },
-      { label: '36-49', value: '36-49' },
-      { label: '50+', value: '50+' },
-    ])
-
     const gender = ref(null);
-    const gender_options = ref([
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-      { label: 'Prefer not to say', value: 'prefer_not_to_say' }
-    ])
-
     const book_length = ref(null);
-    const book_length_options = ref([
-      { label: 'Novella (short)', value: 'novella' },
-      { label: 'Novel (medium)', value: 'novel' },
-      { label: 'Epic Novel (long)', value: 'epic_novel' },
-      { label: 'No Preference', value: 'no_preference' }
-    ])
-
     const highest_comfort_level = ref(null);
-    const comfort_levels = ref([
-      { value: 1, label: 'PG' },
-      { value: 2, label: 'PG-13' },
-      { value: 3, label: 'NC-17' },
-    ])
-
     const books_per_month = ref(null);
-    const books_per_month_options = ref([
-      { value: '0-2', label: '0-2' },
-      { value: '3-5', label: '3-5' },
-      { value: '6+', label: '6+' },
-    ])
-
     const rating = ref(2);
     const headline = ref(null);
     const review = ref(null);
+
+    const {reviews} = Reviews();
+    const router = useRouter();
+    const submit = ()=> {
+      reviews.value.push({
+        rating: rating.value,
+        headline: headline.value,
+        review_text: review.value,
+        date: new Date(),
+        age_range: age_range.value,
+        gender: gender.value,
+        book_length: book_length.value,
+        comfort_level: highest_comfort_level.value,
+        books_per_month: books_per_month.value
+      })
+      router.push('/reviews')
+    }
 
     return {
       age_range,
@@ -150,7 +144,8 @@ export default defineComponent({
       books_per_month_options,
       rating,
       headline,
-      review
+      review,
+      submit
     }
   }
 })
