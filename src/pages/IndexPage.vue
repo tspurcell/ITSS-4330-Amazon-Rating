@@ -81,6 +81,7 @@
 
       <q-card-actions>
         <q-space></q-space>
+        <q-btn to="/reviews" label="Back to reviews"></q-btn>
         <q-btn @click="submit" color="secondary" text-color="black" no-caps label="Submit"></q-btn>
       </q-card-actions>
     </q-card>
