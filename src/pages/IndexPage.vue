@@ -14,7 +14,8 @@
         <div class="flex q-gutter-md items-center">
           <img height="100" src="https://m.media-amazon.com/images/I/61ic+1QdJWL._AC_UL480_FMwebp_QL65_.jpg"/>
           <div>
-            Perhaps the greatest “cloak and sword” story ever written, The Three Musketeers, first published ion 1844,
+            Perhaps the greatest “cloak and sword” story ever written,
+            The Three Musketeers, first published ion 1844,
             is a tale for all time.
           </div>
         </div>
